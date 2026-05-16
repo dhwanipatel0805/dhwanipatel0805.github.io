@@ -1,0 +1,853 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Dhwani Patel — Data Engineer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=DM+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:       #08060f;
+  --surface:  #0d0a18;
+  --card:     #110e1e;
+  --card2:    #161228;
+  --border:   #241d3a;
+  --violet:   #b06aff;
+  --pink:     #ff6ac2;
+  --indigo:   #6a8fff;
+  --aws:      #ff9900;
+  --azure:    #60b4ff;
+  --gcp:      #81b1ff;
+  --gold:     #ffd166;
+  --green:    #39d98a;
+  --mint:     #00e5b0;
+  --txt:      #c8bfe0;
+  --txt-dim:  #5a4d78;
+  --mono:     'Space Mono', monospace;
+  --sans:     'DM Sans', sans-serif;
+  --radius:   10px;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  color: var(--txt);
+  font-family: var(--sans);
+  font-size: 15px;
+  line-height: 1.75;
+  overflow-x: hidden;
+}
+
+/* BACKGROUND */
+body::before {
+  content: '';
+  position: fixed; inset: 0; z-index: 0;
+  background-image:
+    radial-gradient(ellipse at 20% 20%, rgba(176,106,255,.06) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 80%, rgba(255,106,194,.04) 0%, transparent 50%),
+    linear-gradient(rgba(176,106,255,.015) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(176,106,255,.015) 1px, transparent 1px);
+  background-size: 100% 100%, 100% 100%, 52px 52px, 52px 52px;
+  pointer-events: none;
+}
+
+.orb {
+  position: fixed; border-radius: 50%; pointer-events: none; z-index: 0;
+  filter: blur(90px);
+}
+.orb-1 { width: 700px; height: 700px; top: -250px; right: -200px; background: radial-gradient(circle, rgba(176,106,255,.09) 0%, transparent 70%); }
+.orb-2 { width: 500px; height: 500px; bottom: -100px; left: -150px; background: radial-gradient(circle, rgba(255,106,194,.06) 0%, transparent 70%); }
+.orb-3 { width: 350px; height: 350px; top: 60%; right: 20%; background: radial-gradient(circle, rgba(106,143,255,.04) 0%, transparent 70%); }
+
+::-webkit-scrollbar { width: 3px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--violet); border-radius: 2px; }
+
+/* ── NAV ── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 5%; height: 58px;
+  background: rgba(8,6,15,.88);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border);
+}
+.nav-logo { font-family: var(--mono); font-size: 13px; color: var(--violet); letter-spacing: .08em; }
+.nav-logo span { color: var(--txt-dim); }
+.nav-links { display: flex; gap: 24px; list-style: none; }
+.nav-links a {
+  font-family: var(--mono); font-size: 10px;
+  color: var(--txt-dim); text-decoration: none;
+  letter-spacing: .12em; text-transform: uppercase; transition: color .2s;
+}
+.nav-links a:hover { color: var(--violet); }
+
+/* ── SECTIONS ── */
+section { position: relative; z-index: 1; padding: 100px 6%; }
+.section-label {
+  font-family: var(--mono); font-size: 10px; color: var(--violet);
+  letter-spacing: .25em; text-transform: uppercase; margin-bottom: 10px;
+}
+h2.section-title {
+  font-size: clamp(1.9rem, 3.5vw, 2.8rem);
+  font-weight: 800; color: #fff; margin-bottom: 52px; line-height: 1.1;
+}
+h2.section-title em { font-style: normal; color: var(--violet); }
+
+/* ── HERO ── */
+#hero { min-height: 100vh; display: flex; align-items: center; padding-top: 80px; }
+.hero-inner { max-width: 920px; }
+
+.hero-tag {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-family: var(--mono); font-size: 11px; color: var(--violet);
+  background: rgba(176,106,255,.07); border: 1px solid rgba(176,106,255,.2);
+  padding: 5px 16px; border-radius: 20px; margin-bottom: 30px;
+  animation: fadeUp .5s .1s both;
+}
+.hero-tag::before { content: '●'; font-size: 7px; color: var(--pink); animation: pulse 2s infinite; }
+@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.3} }
+
+h1 {
+  font-size: clamp(3rem, 7vw, 5.5rem); font-weight: 800;
+  line-height: 1.0; color: #fff; margin-bottom: 8px;
+  animation: fadeUp .5s .2s both;
+}
+h1 .acc1 { 
+  color: transparent;
+  background: linear-gradient(120deg, var(--violet), var(--pink));
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+
+.hero-roles {
+  display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 28px;
+  animation: fadeUp .5s .3s both;
+}
+.role-pill {
+  font-family: var(--mono); font-size: 10px; letter-spacing: .1em;
+  padding: 4px 12px; border-radius: 3px;
+  text-transform: uppercase;
+}
+.pill-aws   { background: rgba(255,153,0,.1);   border: 1px solid rgba(255,153,0,.25);  color: var(--aws); }
+.pill-azure { background: rgba(96,180,255,.1);  border: 1px solid rgba(96,180,255,.25); color: var(--azure); }
+.pill-gcp   { background: rgba(129,177,255,.1); border: 1px solid rgba(129,177,255,.25);color: var(--gcp); }
+.pill-vi    { background: rgba(176,106,255,.08);border: 1px solid rgba(176,106,255,.2);  color: var(--violet); }
+.pill-pk    { background: rgba(255,106,194,.08);border: 1px solid rgba(255,106,194,.2);  color: var(--pink); }
+.pill-gr    { background: rgba(57,217,138,.08); border: 1px solid rgba(57,217,138,.2);   color: var(--green); }
+
+.hero-bio {
+  font-size: 1.05rem; color: var(--txt); max-width: 680px; margin-bottom: 36px;
+  animation: fadeUp .5s .4s both;
+}
+.hero-bio strong { color: #fff; }
+
+.hero-actions { display: flex; gap: 12px; flex-wrap: wrap; animation: fadeUp .5s .5s both; }
+.btn {
+  display: inline-flex; align-items: center; gap: 8px; padding: 11px 24px;
+  border-radius: 4px; font-family: var(--mono); font-size: 11px;
+  letter-spacing: .08em; text-decoration: none; font-weight: 700;
+  transition: all .2s; cursor: pointer; border: none;
+}
+.btn-primary { background: linear-gradient(120deg, var(--violet), var(--pink)); color: #fff; }
+.btn-primary:hover { opacity: .9; transform: translateY(-2px); }
+.btn-outline { background: transparent; color: var(--violet); border: 1px solid rgba(176,106,255,.4); }
+.btn-outline:hover { background: rgba(176,106,255,.07); transform: translateY(-2px); }
+
+/* STATS */
+.stats-row {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  gap: 1px; margin-top: 60px;
+  background: var(--border);
+  border: 1px solid var(--border); border-radius: var(--radius);
+  overflow: hidden;
+  animation: fadeUp .5s .6s both;
+}
+.stat-item {
+  background: var(--card); padding: 24px 16px;
+  transition: background .2s;
+}
+.stat-item:hover { background: var(--card2); }
+.stat-num { font-family: var(--mono); font-size: 1.8rem; font-weight: 700; line-height: 1;
+  background: linear-gradient(120deg, var(--violet), var(--pink));
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+.stat-label { font-size: .65rem; color: var(--txt-dim); text-transform: uppercase; letter-spacing: .08em; margin-top: 6px; }
+
+/* ── ROLES BANNER ── */
+.roles-banner {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 28px 36px;
+  display: flex; align-items: center; gap: 24px; flex-wrap: wrap;
+}
+.roles-label { font-family: var(--mono); font-size: 10px; color: var(--txt-dim); letter-spacing: .15em; text-transform: uppercase; white-space: nowrap; }
+.roles-list { display: flex; gap: 10px; flex-wrap: wrap; }
+.role-badge {
+  font-family: var(--mono); font-size: 10px; letter-spacing: .1em;
+  padding: 6px 14px; border-radius: 3px;
+  background: rgba(176,106,255,.06); border: 1px solid rgba(176,106,255,.15);
+  color: var(--txt); transition: all .2s; cursor: default;
+}
+.role-badge:hover { border-color: var(--violet); color: var(--violet); }
+
+/* ── CLOUD ── */
+#cloud { background: rgba(13,10,24,.6); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+.cloud-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.cloud-card {
+  background: var(--card); border: 1px solid var(--border); border-radius: var(--radius);
+  padding: 32px 28px; transition: transform .2s; position: relative; overflow: hidden;
+}
+.cloud-card::before {
+  content: ''; position: absolute; inset: 0;
+  opacity: 0; transition: opacity .2s;
+}
+.cloud-card.aws-card::before  { background: linear-gradient(135deg, rgba(255,153,0,.05) 0%, transparent 60%); }
+.cloud-card.az-card::before   { background: linear-gradient(135deg, rgba(96,180,255,.05) 0%, transparent 60%); }
+.cloud-card.gcp-card::before  { background: linear-gradient(135deg, rgba(129,177,255,.05) 0%, transparent 60%); }
+.cloud-card:hover::before { opacity: 1; }
+.cloud-card:hover { transform: translateY(-4px); }
+.cloud-card.aws-card { border-top: 2px solid var(--aws); }
+.cloud-card.az-card  { border-top: 2px solid var(--azure); }
+.cloud-card.gcp-card { border-top: 2px solid var(--gcp); }
+.cloud-logo { font-size: 2rem; margin-bottom: 12px; }
+.cloud-name { font-weight: 800; font-size: 1.1rem; color: #fff; margin-bottom: 4px; }
+.cloud-sub  { font-family: var(--mono); font-size: 10px; color: var(--txt-dim); letter-spacing: .1em; margin-bottom: 16px; }
+.cloud-services { display: flex; flex-wrap: wrap; gap: 6px; }
+.svc-tag { font-family: var(--mono); font-size: 10px; padding: 2px 8px; border-radius: 2px; }
+.aws-tag  { background: rgba(255,153,0,.08);  border: 1px solid rgba(255,153,0,.2);  color: #ffb83f; }
+.az-tag   { background: rgba(96,180,255,.08); border: 1px solid rgba(96,180,255,.2); color: var(--azure); }
+.gcp-tag  { background: rgba(129,177,255,.08);border: 1px solid rgba(129,177,255,.2);color: var(--gcp); }
+
+/* ── SKILLS ── */
+.skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 18px; }
+.skill-card {
+  background: var(--card); border: 1px solid var(--border); border-radius: var(--radius);
+  padding: 22px; transition: border-color .2s, transform .2s;
+}
+.skill-card:hover { border-color: rgba(176,106,255,.4); transform: translateY(-3px); }
+.skill-card-icon { font-size: 1.4rem; margin-bottom: 10px; }
+.skill-card h3 { font-family: var(--mono); font-size: 10px; letter-spacing: .15em; text-transform: uppercase; color: var(--violet); margin-bottom: 12px; }
+.skill-tags { display: flex; flex-wrap: wrap; gap: 5px; }
+.tag { font-family: var(--mono); font-size: 10px; padding: 3px 9px; border-radius: 2px; background: rgba(176,106,255,.06); border: 1px solid rgba(176,106,255,.12); color: var(--txt); }
+
+/* ── EXPERIENCE ── */
+.exp-timeline { position: relative; padding-left: 32px; }
+.exp-timeline::before {
+  content: ''; position: absolute; left: 0; top: 8px; bottom: 0;
+  width: 1px; background: linear-gradient(to bottom, var(--violet), var(--border));
+}
+.exp-item { position: relative; margin-bottom: 52px; }
+.exp-item::before {
+  content: ''; position: absolute; left: -37px; top: 8px;
+  width: 10px; height: 10px; border-radius: 50%;
+  background: linear-gradient(120deg, var(--violet), var(--pink));
+  box-shadow: 0 0 0 4px rgba(176,106,255,.12);
+}
+.exp-role    { font-size: 1.15rem; font-weight: 700; color: #fff; margin-bottom: 6px; }
+.exp-company { font-size: .9rem; color: var(--violet); margin-bottom: 4px; }
+.exp-meta    { font-family: var(--mono); font-size: 10px; color: var(--txt-dim); display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 16px; }
+.exp-cloud-tags { display: flex; gap: 6px; margin-bottom: 16px; flex-wrap: wrap; }
+.exp-bullets { list-style: none; }
+.exp-bullets li {
+  position: relative; padding-left: 18px;
+  margin-bottom: 10px; color: var(--txt); font-size: .91rem;
+}
+.exp-bullets li::before { content: '›'; position: absolute; left: 0; color: var(--violet); font-size: 14px; font-weight: 700; }
+.exp-bullets li strong { color: var(--gold); font-weight: 600; }
+.exp-bullets li .az-hl  { color: var(--azure); }
+.exp-bullets li .aws-hl { color: #ffb83f; }
+.exp-bullets li .gcp-hl { color: var(--gcp); }
+.exp-bullets li .vi-hl  { color: var(--violet); }
+.exp-bullets li .pk-hl  { color: var(--pink); }
+.exp-bullets li .gr-hl  { color: var(--green); }
+
+/* ── PROJECTS ── */
+#projects { background: rgba(13,10,24,.6); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+.projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 18px; }
+.project-card {
+  background: var(--card); border: 1px solid var(--border); border-radius: var(--radius);
+  padding: 28px; transition: all .2s; position: relative; overflow: hidden;
+}
+.project-card::after {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  opacity: 0; transition: opacity .2s;
+}
+.project-card.aws-p::after { background: linear-gradient(90deg, var(--aws), #ffcc70); }
+.project-card.az-p::after  { background: linear-gradient(90deg, var(--azure), var(--gcp)); }
+.project-card.vi-p::after  { background: linear-gradient(90deg, var(--violet), var(--pink)); }
+.project-card.gr-p::after  { background: linear-gradient(90deg, var(--green), var(--mint)); }
+.project-card:hover { border-color: rgba(176,106,255,.25); transform: translateY(-4px); }
+.project-card:hover::after { opacity: 1; }
+.proj-metric { font-family: var(--mono); font-size: 2.2rem; font-weight: 700; line-height: 1; margin-bottom: 8px;
+  background: linear-gradient(120deg, var(--violet), var(--pink));
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+.proj-name { font-size: .95rem; font-weight: 700; color: #fff; margin-bottom: 10px; }
+.proj-desc { font-size: .84rem; color: var(--txt-dim); margin-bottom: 16px; line-height: 1.6; }
+.proj-tech { display: flex; flex-wrap: wrap; gap: 5px; }
+.tech-chip { font-family: var(--mono); font-size: 10px; padding: 2px 8px; border-radius: 2px; background: rgba(176,106,255,.07); border: 1px solid rgba(176,106,255,.18); color: #c4a8ff; }
+.tech-chip.aws-chip { background: rgba(255,153,0,.07); border-color: rgba(255,153,0,.2); color: #ffb83f; }
+.tech-chip.az-chip  { background: rgba(96,180,255,.07); border-color: rgba(96,180,255,.2); color: var(--azure); }
+.tech-chip.gcp-chip { background: rgba(129,177,255,.07); border-color: rgba(129,177,255,.2); color: var(--gcp); }
+.tech-chip.gr-chip  { background: rgba(57,217,138,.07); border-color: rgba(57,217,138,.2);  color: var(--green); }
+
+.proj-category {
+  font-family: var(--mono); font-size: 9px; letter-spacing: .15em;
+  text-transform: uppercase; margin-bottom: 12px; padding: 2px 8px;
+  border-radius: 2px; display: inline-block;
+}
+.cat-aws { background: rgba(255,153,0,.08); color: #ffb83f; border: 1px solid rgba(255,153,0,.2); }
+.cat-az  { background: rgba(96,180,255,.08); color: var(--azure); border: 1px solid rgba(96,180,255,.2); }
+.cat-vi  { background: rgba(176,106,255,.08); color: var(--violet); border: 1px solid rgba(176,106,255,.2); }
+.cat-gr  { background: rgba(57,217,138,.08); color: var(--green); border: 1px solid rgba(57,217,138,.2); }
+.cat-pk  { background: rgba(255,106,194,.08); color: var(--pink); border: 1px solid rgba(255,106,194,.2); }
+
+/* ── EDUCATION ── */
+.edu-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 18px; }
+.edu-card {
+  background: var(--card); border: 1px solid var(--border); border-radius: var(--radius);
+  padding: 28px; transition: border-color .2s;
+}
+.edu-card:hover { border-color: var(--violet); }
+.edu-degree { font-size: 1.05rem; font-weight: 700; color: #fff; margin-bottom: 6px; }
+.edu-school  { font-size: .9rem; color: var(--violet); margin-bottom: 4px; }
+.edu-meta    { font-family: var(--mono); font-size: 10px; color: var(--txt-dim); }
+
+/* ── CONTACT ── */
+#contact { text-align: center; }
+.contact-box {
+  display: inline-block; max-width: 640px; width: 100%;
+  background: var(--card); border: 1px solid var(--border); border-radius: 12px;
+  padding: 52px 64px;
+}
+.contact-headline { font-size: 1.5rem; font-weight: 700; color: #fff; margin-bottom: 12px; }
+.contact-sub { font-size: .9rem; color: var(--txt-dim); margin-bottom: 24px; }
+.contact-email { font-family: var(--mono); font-size: 1rem; color: var(--violet); display: block; text-decoration: none; margin-bottom: 6px; }
+.contact-email:hover { color: var(--pink); }
+.contact-phone { font-family: var(--mono); font-size: .85rem; color: var(--txt-dim); display: block; margin-bottom: 28px; }
+.contact-links { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; }
+
+/* ── FOOTER ── */
+footer {
+  position: relative; z-index: 1; text-align: center;
+  padding: 24px 6%; border-top: 1px solid var(--border);
+  font-family: var(--mono); font-size: 10px; color: var(--txt-dim);
+}
+footer .f-name { color: var(--violet); }
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp { from { opacity: 0; transform: translateY(22px); } to { opacity: 1; transform: translateY(0); } }
+.reveal { opacity: 0; transform: translateY(26px); transition: opacity .55s, transform .55s; }
+.reveal.visible { opacity: 1; transform: none; }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 1000px) { .stats-row { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 900px)  { .cloud-grid { grid-template-columns: 1fr; } }
+@media (max-width: 640px)  { nav .nav-links { display: none; } .contact-box { padding: 32px 24px; } }
+</style>
+</head>
+<body>
+
+<div class="orb orb-1"></div>
+<div class="orb orb-2"></div>
+<div class="orb orb-3"></div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">dp<span>.engineer</span></div>
+  <ul class="nav-links">
+    <li><a href="#hero">About</a></li>
+    <li><a href="#cloud">Cloud</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- ══════════ HERO ══════════ -->
+<section id="hero">
+  <div class="hero-inner">
+    <div class="hero-tag">Open to Opportunities &nbsp;·&nbsp; Chicago, IL &nbsp;·&nbsp; Remote / Hybrid / Onsite</div>
+    <h1>Dhwani<br><span class="acc1">Patel</span></h1>
+
+    <div class="hero-roles">
+      <span class="role-pill pill-vi">Data Engineer</span>
+      <span class="role-pill pill-aws">AWS Data Engineer</span>
+      <span class="role-pill pill-pk">ETL / Pipeline Engineer</span>
+      <span class="role-pill pill-azure">Analytics Engineer</span>
+      <span class="role-pill pill-gr">DataDevOps Engineer</span>
+    </div>
+
+    <p class="hero-bio">
+      Data Engineer with <strong>2+ years</strong> of experience building scalable ETL pipelines, data lakes, and cloud-native architectures across <strong>AWS, Azure, and GCP</strong>. From <strong>real-time wildfire sensor ingestion</strong> to NACHA banking pipelines — I deliver production-hardened data systems with a track record of <strong>40% fewer pipeline errors</strong>, <strong>35% faster execution</strong>, and <strong>SOC 2 / GDPR compliance</strong>.
+    </p>
+
+    <div class="hero-actions">
+      <a href="#contact" class="btn btn-primary">Get In Touch</a>
+      <a href="#experience" class="btn btn-outline">View Experience</a>
+      <a href="./Dhwani_Patel_Data.pdf" target="_blank" class="btn btn-outline">Download Resume ↓</a>
+    </div>
+
+    <div class="stats-row">
+      <div class="stat-item">
+        <div class="stat-num">40%</div>
+        <div class="stat-label">Pipeline Error<br>Reduction</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">35%</div>
+        <div class="stat-label">Execution Time<br>Improvement</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">60%</div>
+        <div class="stat-label">Data Prep Time<br>Cut (dbt)</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">2+</div>
+        <div class="stat-label">Years Enterprise<br>Data Engineering</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TARGET ROLES BANNER -->
+<section style="padding: 0 6% 60px; position: relative; z-index:1;">
+  <div class="roles-banner reveal">
+    <span class="roles-label">Open to roles →</span>
+    <div class="roles-list">
+      <span class="role-badge">Data Engineer</span>
+      <span class="role-badge">Cloud Data Engineer</span>
+      <span class="role-badge">Analytics Engineer</span>
+      <span class="role-badge">ETL Developer</span>
+      <span class="role-badge">Data Platform Engineer</span>
+      <span class="role-badge">DataDevOps Engineer</span>
+      <span class="role-badge">Pipeline Engineer</span>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ CLOUD EXPERTISE ══════════ -->
+<section id="cloud">
+  <div class="reveal">
+    <p class="section-label">// 02 &nbsp; Multi-Cloud</p>
+    <h2 class="section-title">Cloud <em>Expertise</em></h2>
+  </div>
+  <div class="cloud-grid reveal">
+
+    <div class="cloud-card aws-card">
+      <div class="cloud-logo">🟠</div>
+      <div class="cloud-name">Amazon Web Services</div>
+      <div class="cloud-sub">PRIMARY CLOUD · PRODUCTION WORKLOADS</div>
+      <div class="cloud-services">
+        <span class="svc-tag aws-tag">S3</span>
+        <span class="svc-tag aws-tag">AWS Glue</span>
+        <span class="svc-tag aws-tag">Lambda</span>
+        <span class="svc-tag aws-tag">Redshift</span>
+        <span class="svc-tag aws-tag">Athena</span>
+        <span class="svc-tag aws-tag">Lake Formation</span>
+        <span class="svc-tag aws-tag">SES</span>
+        <span class="svc-tag aws-tag">CloudWatch</span>
+        <span class="svc-tag aws-tag">Fargate</span>
+        <span class="svc-tag aws-tag">CloudFormation</span>
+      </div>
+    </div>
+
+    <div class="cloud-card az-card">
+      <div class="cloud-logo">🔵</div>
+      <div class="cloud-name">Microsoft Azure</div>
+      <div class="cloud-sub">DATABRICKS · SYNAPSE · ADF</div>
+      <div class="cloud-services">
+        <span class="svc-tag az-tag">Azure Data Factory</span>
+        <span class="svc-tag az-tag">Databricks</span>
+        <span class="svc-tag az-tag">Azure Synapse</span>
+        <span class="svc-tag az-tag">ADLS Gen2</span>
+        <span class="svc-tag az-tag">Azure Blob Storage</span>
+        <span class="svc-tag az-tag">CosmosDB</span>
+        <span class="svc-tag az-tag">Azure DevOps</span>
+      </div>
+    </div>
+
+    <div class="cloud-card gcp-card">
+      <div class="cloud-logo">🔷</div>
+      <div class="cloud-name">Google Cloud Platform</div>
+      <div class="cloud-sub">BIGQUERY · ANALYTICS</div>
+      <div class="cloud-services">
+        <span class="svc-tag gcp-tag">BigQuery</span>
+        <span class="svc-tag gcp-tag">Cloud Storage</span>
+        <span class="svc-tag gcp-tag">IAM</span>
+        <span class="svc-tag gcp-tag">Pub/Sub</span>
+        <span class="svc-tag gcp-tag">Dataproc</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══════════ SKILLS ══════════ -->
+<section id="skills">
+  <div class="reveal">
+    <p class="section-label">// 03 &nbsp; Technical Skills</p>
+    <h2 class="section-title">Skills &amp; <em>Stack</em></h2>
+  </div>
+  <div class="skills-grid reveal">
+    <div class="skill-card">
+      <div class="skill-card-icon">⚡</div>
+      <h3>Big Data Processing</h3>
+      <div class="skill-tags">
+        <span class="tag">Apache Spark</span><span class="tag">PySpark</span>
+        <span class="tag">Hadoop</span><span class="tag">Databricks</span>
+        <span class="tag">Kafka</span><span class="tag">Flink</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-card-icon">🔄</div>
+      <h3>Orchestration & ETL</h3>
+      <div class="skill-tags">
+        <span class="tag">Apache Airflow</span><span class="tag">AWS Glue</span>
+        <span class="tag">Azure Data Factory</span><span class="tag">dbt</span>
+        <span class="tag">Lambda</span><span class="tag">Kafka</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-card-icon">🗄️</div>
+      <h3>Data Warehousing</h3>
+      <div class="skill-tags">
+        <span class="tag">Redshift</span><span class="tag">BigQuery</span>
+        <span class="tag">Azure Synapse</span><span class="tag">CosmosDB</span>
+        <span class="tag">PostgreSQL</span><span class="tag">SQL Server</span>
+        <span class="tag">Athena</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-card-icon">🏗️</div>
+      <h3>Architecture Patterns</h3>
+      <div class="skill-tags">
+        <span class="tag">Four-Zone Data Lake</span>
+        <span class="tag">Medallion Architecture</span>
+        <span class="tag">Incremental Loads</span>
+        <span class="tag">Event-Driven</span>
+        <span class="tag">Real-Time Ingestion</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-card-icon">🔧</div>
+      <h3>DevOps & DataOps</h3>
+      <div class="skill-tags">
+        <span class="tag">Terraform</span><span class="tag">CloudFormation</span>
+        <span class="tag">Jenkins</span><span class="tag">GitLab CI</span>
+        <span class="tag">Docker</span><span class="tag">Kubernetes</span>
+        <span class="tag">AWS Fargate</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-card-icon">🐍</div>
+      <h3>Languages</h3>
+      <div class="skill-tags">
+        <span class="tag">Python</span><span class="tag">SQL</span>
+        <span class="tag">PL/SQL</span><span class="tag">Scala</span>
+        <span class="tag">R</span><span class="tag">Java</span>
+        <span class="tag">Shell / Bash</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-card-icon">📡</div>
+      <h3>Monitoring & Observability</h3>
+      <div class="skill-tags">
+        <span class="tag">AWS CloudWatch</span><span class="tag">Prometheus</span>
+        <span class="tag">Grafana</span><span class="tag">Splunk</span>
+        <span class="tag">DataDog</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-card-icon">📊</div>
+      <h3>Analytics & BI</h3>
+      <div class="skill-tags">
+        <span class="tag">Power BI</span><span class="tag">Amazon QuickSight</span>
+        <span class="tag">DOMO</span><span class="tag">dbt Metrics</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-card-icon">🔒</div>
+      <h3>Governance & Compliance</h3>
+      <div class="skill-tags">
+        <span class="tag">SOC 2</span><span class="tag">GDPR</span>
+        <span class="tag">Lake Formation</span><span class="tag">RBAC / IAM</span>
+        <span class="tag">Lineage Tracking</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ EXPERIENCE ══════════ -->
+<section id="experience" style="background: rgba(13,10,24,.5); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);">
+  <div class="reveal">
+    <p class="section-label">// 04 &nbsp; Career</p>
+    <h2 class="section-title">Work <em>Experience</em></h2>
+  </div>
+  <div class="exp-timeline">
+
+    <!-- INTERLINKED -->
+    <div class="exp-item reveal">
+      <div class="exp-role">Data Engineer Intern</div>
+      <div class="exp-company">Interlinked — AI-Powered Disaster Response Platform</div>
+      <div class="exp-meta">
+        <span>📍 Berkeley, California (Remote)</span>
+        <span>🗓 March 2026 – Present</span>
+      </div>
+      <div class="exp-cloud-tags">
+        <span class="role-pill pill-aws"  style="font-size:9px;padding:3px 10px;">AWS</span>
+        <span class="role-pill pill-azure" style="font-size:9px;padding:3px 10px;">Azure · dbt</span>
+        <span class="role-pill pill-vi"   style="font-size:9px;padding:3px 10px;">PySpark · Databricks</span>
+        <span class="role-pill pill-pk"   style="font-size:9px;padding:3px 10px;">Wildfire · Real-Time</span>
+      </div>
+      <ul class="exp-bullets">
+        <li>Engineered <span class="vi-hl">real-time wildfire sensor data ingestion pipelines</span> using <span class="vi-hl">Apache Spark on Databricks</span> and <span class="aws-hl">AWS S3</span>, reducing data availability latency by <strong>40%</strong> and enabling earlier threat detection for emergency response teams.</li>
+        <li>Built end-to-end <span class="vi-hl">dbt transformation workflows</span> on <span class="az-hl">Azure</span> converting raw geospatial telemetry into analytics-ready models — cutting data preparation time by <strong>60%</strong> and accelerating risk intelligence dashboard refresh cycles.</li>
+        <li>Developed automated <span class="gr-hl">data quality monitoring frameworks</span> using Python and SQL across mission-critical environmental feeds on <span class="aws-hl">AWS</span>, reducing data integrity incidents by <strong>50%</strong> and ensuring continuous situational awareness.</li>
+        <li>Designed and orchestrated feature engineering pipelines using <span class="vi-hl">Apache Airflow</span> and PySpark to deliver validated, clean inputs to predictive wildfire spread models — enabling more precise resource allocation recommendations.</li>
+        <li>Implemented complex <span class="az-hl">PL/SQL and dbt transformation logic</span> across environmental data models on Azure, producing documented pipelines that streamlined compliance and reporting workflows for disaster response stakeholders.</li>
+      </ul>
+    </div>
+
+    <!-- ADDON SOLUTIONS -->
+    <div class="exp-item reveal">
+      <div class="exp-role">Data Engineer</div>
+      <div class="exp-company">Addon Solutions</div>
+      <div class="exp-meta">
+        <span>📍 Gujarat, India</span>
+        <span>🗓 November 2023 – November 2024</span>
+      </div>
+      <div class="exp-cloud-tags">
+        <span class="role-pill pill-aws"  style="font-size:9px;padding:3px 10px;">AWS Primary</span>
+        <span class="role-pill pill-vi"   style="font-size:9px;padding:3px 10px;">Glue · Lambda · PySpark</span>
+        <span class="role-pill pill-gr"   style="font-size:9px;padding:3px 10px;">SOC 2 · GDPR</span>
+      </div>
+      <ul class="exp-bullets">
+        <li>Architected a <span class="vi-hl">four-zone AWS S3 data lake</span> (Landing → Raw → Trusted → Curated) with <span class="aws-hl">AWS Glue crawlers</span> and <span class="aws-hl">Athena</span> tables enabling ad-hoc analytics across all ingested datasets.</li>
+        <li>Engineered ETL pipelines using <span class="aws-hl">AWS Glue and Lambda</span> to process NACHA banking transaction files; implemented <span class="aws-hl">AWS SES</span> alerts for ingestion and transformation completion events.</li>
+        <li>Authored PySpark schema standardization scripts for multi-format source files — reducing downstream parsing errors by <strong>40%</strong> across all active pipelines.</li>
+        <li>Implemented data governance using <span class="aws-hl">AWS Lake Formation</span> with least-privilege RBAC, lineage tracking, and <strong>SOC 2 / GDPR compliance controls</strong>.</li>
+      </ul>
+    </div>
+
+    <!-- N VISION IQ -->
+    <div class="exp-item reveal">
+      <div class="exp-role">Data Engineer</div>
+      <div class="exp-company">N Vision IQ</div>
+      <div class="exp-meta">
+        <span>📍 Gujarat, India</span>
+        <span>🗓 November 2022 – October 2023</span>
+      </div>
+      <div class="exp-cloud-tags">
+        <span class="role-pill pill-aws"  style="font-size:9px;padding:3px 10px;">AWS · Redshift</span>
+        <span class="role-pill pill-vi"   style="font-size:9px;padding:3px 10px;">Airflow · Terraform</span>
+        <span class="role-pill pill-pk"   style="font-size:9px;padding:3px 10px;">Multi-Source Ingestion</span>
+      </div>
+      <ul class="exp-bullets">
+        <li>Built <span class="vi-hl">Apache Airflow DAGs</span> for multi-source ingestion (Workday, HubSpot, Zendesk, Kantata, Quickbase) into a unified data warehouse with automated dependency management.</li>
+        <li>Supported warehouse migration to <span class="aws-hl">AWS Redshift + S3 + Lake Formation</span>; provisioned all infrastructure via <span class="gr-hl">Terraform</span> across dev, staging, and production environments.</li>
+        <li>Designed incremental load strategies replacing full-refresh patterns — reducing pipeline execution time by <strong>35%</strong> across all production DAGs.</li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══════════ PROJECTS ══════════ -->
+<section id="projects">
+  <div class="reveal">
+    <p class="section-label">// 05 &nbsp; Impact</p>
+    <h2 class="section-title">Key Projects &amp; <em>Achievements</em></h2>
+  </div>
+  <div class="projects-grid reveal">
+
+    <!-- WILDFIRE INGESTION -->
+    <div class="project-card vi-p">
+      <div class="proj-category cat-vi">Real-Time · AI/ML · Disaster Response</div>
+      <div class="proj-metric">40%</div>
+      <div class="proj-name">Wildfire Sensor Real-Time Ingestion Pipeline</div>
+      <div class="proj-desc">Built real-time ingestion pipelines for wildfire sensor telemetry using Apache Spark on Databricks and AWS S3. Reduced data latency by 40%, enabling earlier threat detection for emergency response teams across active wildfire zones.</div>
+      <div class="proj-tech">
+        <span class="tech-chip">Apache Spark</span>
+        <span class="tech-chip">Databricks</span>
+        <span class="tech-chip aws-chip">AWS S3</span>
+        <span class="tech-chip">PySpark</span>
+        <span class="tech-chip">Airflow</span>
+      </div>
+    </div>
+
+    <!-- DBT GEOSPATIAL -->
+    <div class="project-card az-p">
+      <div class="proj-category cat-az">Azure · dbt · Geospatial</div>
+      <div class="proj-metric">60%</div>
+      <div class="proj-name">Geospatial Telemetry dbt Transformation Pipeline</div>
+      <div class="proj-desc">End-to-end dbt transformation workflows on Azure converting raw geospatial telemetry into analytics-ready risk intelligence models. Reduced data preparation time by 60% and accelerated dashboard refresh cycles for disaster response stakeholders.</div>
+      <div class="proj-tech">
+        <span class="tech-chip">dbt</span>
+        <span class="tech-chip az-chip">Azure</span>
+        <span class="tech-chip">PL/SQL</span>
+        <span class="tech-chip">Geospatial</span>
+        <span class="tech-chip">Python</span>
+      </div>
+    </div>
+
+    <!-- DATA QUALITY MONITORING -->
+    <div class="project-card gr-p">
+      <div class="proj-category cat-gr">AWS · Data Quality</div>
+      <div class="proj-metric">50%</div>
+      <div class="proj-name">Automated Data Quality Monitoring Framework</div>
+      <div class="proj-desc">Developed Python and SQL-based automated data quality monitoring across mission-critical environmental feeds on AWS. Reduced data integrity incidents by 50%, ensuring continuous situational awareness for real-time disaster response systems.</div>
+      <div class="proj-tech">
+        <span class="tech-chip">Python</span>
+        <span class="tech-chip">SQL</span>
+        <span class="tech-chip aws-chip">AWS CloudWatch</span>
+        <span class="tech-chip gr-chip">Data Quality</span>
+        <span class="tech-chip">Alerting</span>
+      </div>
+    </div>
+
+    <!-- NACHA BANKING PIPELINE -->
+    <div class="project-card aws-p">
+      <div class="proj-category cat-aws">AWS · Banking · ETL</div>
+      <div class="proj-metric">4-Zone</div>
+      <div class="proj-name">AWS NACHA Banking Transaction Lake</div>
+      <div class="proj-desc">Architected a four-zone AWS S3 data lake (Landing→Raw→Trusted→Curated) with Glue crawlers and Athena tables for NACHA banking transaction files. Integrated AWS SES alerting and PySpark schema standardization — cutting downstream parsing errors by 40%.</div>
+      <div class="proj-tech">
+        <span class="tech-chip aws-chip">AWS Glue</span>
+        <span class="tech-chip aws-chip">S3</span>
+        <span class="tech-chip aws-chip">Lambda</span>
+        <span class="tech-chip aws-chip">SES</span>
+        <span class="tech-chip">PySpark</span>
+        <span class="tech-chip aws-chip">Athena</span>
+      </div>
+    </div>
+
+    <!-- LAKE FORMATION GOVERNANCE -->
+    <div class="project-card aws-p">
+      <div class="proj-category cat-aws">AWS · Governance · SOC 2</div>
+      <div class="proj-metric">0 Findings</div>
+      <div class="proj-name">AWS Lake Formation Governance & Compliance</div>
+      <div class="proj-desc">Implemented AWS Lake Formation with least-privilege RBAC, data lineage tracking, and SOC 2 / GDPR compliance controls. Established column-level access policies and audit-ready metadata across all production data assets.</div>
+      <div class="proj-tech">
+        <span class="tech-chip aws-chip">Lake Formation</span>
+        <span class="tech-chip">SOC 2</span>
+        <span class="tech-chip">GDPR</span>
+        <span class="tech-chip">RBAC</span>
+        <span class="tech-chip">Lineage</span>
+      </div>
+    </div>
+
+    <!-- REAL-TIME SAAS KAFKA -->
+    <div class="project-card vi-p">
+      <div class="proj-category cat-vi">AWS · Kafka · Real-Time</div>
+      <div class="proj-metric">Real-Time</div>
+      <div class="proj-name">Real-Time SaaS Data Pipeline on AWS</div>
+      <div class="proj-desc">Built a real-time ingestion pipeline using Apache Kafka, Lambda, and S3 feeding into Redshift with automated PySpark transformations. Monitored pipeline health via AWS CloudWatch and Airflow alerts — reducing mean issue resolution time by 30% through proactive runbooks.</div>
+      <div class="proj-tech">
+        <span class="tech-chip">Kafka</span>
+        <span class="tech-chip aws-chip">Lambda</span>
+        <span class="tech-chip aws-chip">Redshift</span>
+        <span class="tech-chip">Terraform</span>
+        <span class="tech-chip">Airflow</span>
+        <span class="tech-chip aws-chip">CloudWatch</span>
+      </div>
+    </div>
+
+    <!-- MULTI-SOURCE AIRFLOW -->
+    <div class="project-card aws-p">
+      <div class="proj-category cat-aws">AWS · Airflow · SaaS Integration</div>
+      <div class="proj-metric">35%</div>
+      <div class="proj-name">Multi-Source Airflow DAG Orchestration</div>
+      <div class="proj-desc">Designed Apache Airflow DAGs for multi-source ingestion from Workday, HubSpot, Zendesk, Kantata, and QuickBase into a unified Redshift warehouse. Replaced full-refresh patterns with incremental loads, reducing execution time by 35% across all production DAGs.</div>
+      <div class="proj-tech">
+        <span class="tech-chip">Airflow</span>
+        <span class="tech-chip aws-chip">Redshift</span>
+        <span class="tech-chip">Workday</span>
+        <span class="tech-chip">HubSpot</span>
+        <span class="tech-chip gr-chip">Terraform</span>
+        <span class="tech-chip">Incremental Load</span>
+      </div>
+    </div>
+
+    <!-- WILDFIRE PREDICTIVE FEATURE ENG -->
+    <div class="project-card gr-p">
+      <div class="proj-category cat-pk">ML · Feature Engineering</div>
+      <div class="proj-metric">Precision+</div>
+      <div class="proj-name">Wildfire Spread Predictive Feature Pipeline</div>
+      <div class="proj-desc">Designed and orchestrated feature engineering pipelines using Apache Airflow and PySpark to deliver validated, clean inputs to predictive wildfire spread models — enabling more precise resource allocation and early-warning recommendations for emergency agencies.</div>
+      <div class="proj-tech">
+        <span class="tech-chip">Airflow</span>
+        <span class="tech-chip">PySpark</span>
+        <span class="tech-chip">Feature Engineering</span>
+        <span class="tech-chip aws-chip">AWS S3</span>
+        <span class="tech-chip">Python</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══════════ EDUCATION ══════════ -->
+<section id="education">
+  <div class="reveal">
+    <p class="section-label">// 06 &nbsp; Education</p>
+    <h2 class="section-title">Academic <em>Background</em></h2>
+  </div>
+  <div class="edu-grid reveal">
+    <div class="edu-card">
+      <div class="edu-degree">M.S. in Computer Science</div>
+      <div class="edu-school">DePaul University</div>
+      <div class="edu-meta">Chicago, IL &nbsp;·&nbsp; January 2025 – December 2026</div>
+    </div>
+    <div class="edu-card">
+      <div class="edu-degree">B.Computer Application</div>
+      <div class="edu-school">Silver Oak University</div>
+      <div class="edu-meta">Gujarat, India &nbsp;·&nbsp; August 2021 – June 2024</div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ CONTACT ══════════ -->
+<section id="contact">
+  <div class="reveal">
+    <p class="section-label">// 07 &nbsp; Let's Connect</p>
+    <h2 class="section-title">Get In <em>Touch</em></h2>
+    <div class="contact-box">
+      <div class="contact-headline">Open to New Opportunities</div>
+      <p class="contact-sub">Actively seeking Data Engineer, Analytics Engineer, and ETL Pipeline roles across AWS, Azure, and GCP. Let's build something impactful together.</p>
+      <a class="contact-email" href="mailto:pateldhwani805@gmail.com">pateldhwani805@gmail.com</a>
+      <span class="contact-phone">773-815-2616</span>
+      <div class="contact-links">
+        <a href="https://www.linkedin.com/in/dhwanipatel" target="_blank" class="btn btn-outline">LinkedIn</a>
+        <a href="./Dhwani_Patel_Data.pdf" target="_blank" class="btn btn-primary">Download Resume ↓</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span class="f-name">Dhwani Patel</span> &nbsp;·&nbsp; Data Engineer &nbsp;·&nbsp; AWS · Azure · GCP &nbsp;·&nbsp; Chicago, IL &nbsp;·&nbsp; pateldhwani805@gmail.com
+</footer>
+
+<script>
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+  const secs = document.querySelectorAll('section[id]');
+  const links = document.querySelectorAll('.nav-links a');
+  window.addEventListener('scroll', () => {
+    let cur = '';
+    secs.forEach(s => { if (window.scrollY >= s.offsetTop - 90) cur = s.id; });
+    links.forEach(a => {
+      a.style.color = a.getAttribute('href') === '#'+cur ? 'var(--violet)' : '';
+    });
+  });
+</script>
+</body>
+</html>
