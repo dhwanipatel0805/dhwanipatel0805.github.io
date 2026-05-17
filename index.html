@@ -6,6 +6,8 @@
 <title>Dhwani Patel — Data Engineer</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
+<script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
 <style>
 :root {
   --white:   #ffffff;
@@ -380,7 +382,7 @@ footer a{color:rgba(255,255,255,.5);text-decoration:none}
 <body>
 
 <!-- FLOATING BOOK CALL -->
-<a href="#schedule" class="float-book">
+<a href="#" onclick="Calendly.initPopupWidget({url:'https://calendly.com/pateldhwani805/30min'});return false;" class="float-book">
   <span class="cal-icon">📅</span> Book a Call
 </a>
 
@@ -393,7 +395,7 @@ footer a{color:rgba(255,255,255,.5);text-decoration:none}
       <li><a href="#skills">Skills</a></li>
       <li><a href="#experience">Experience</a></li>
       <li><a href="#projects">Projects</a></li>
-      <li><a href="#schedule">Book a Call</a></li>
+      <li><a href="#" onclick="Calendly.initPopupWidget({url:'https://calendly.com/pateldhwani805/30min'});return false;">Book a Call</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
   </div>
@@ -408,7 +410,7 @@ footer a{color:rgba(255,255,255,.5);text-decoration:none}
     From real-time wildfire intelligence to NACHA banking lakes — delivering systems that cut errors by 40% and accelerate insights by 60%.
   </p>
   <div class="hero-cta">
-    <a href="#schedule" class="btn btn-fill">📅 Schedule a Call</a>
+    <a href="#" onclick="Calendly.initPopupWidget({url:'https://calendly.com/pateldhwani805/30min'});return false;" class="btn btn-fill">📅 Schedule a Call</a>
     <a href="#experience" class="btn btn-ghost">View Experience</a>
     <a href="./Dhwani_Patel_Data.pdf" target="_blank" class="btn btn-ghost">Resume ↓</a>
   </div>
@@ -826,7 +828,7 @@ footer a{color:rgba(255,255,255,.5);text-decoration:none}
           <li>Available for full-time, contract & consulting</li>
         </ul>
         <div class="schedule-cta">
-          <a href="mailto:pateldhwani805@gmail.com?subject=Let's%20Schedule%20a%20Call&body=Hi%20Dhwani%2C%0A%0AI'd%20love%20to%20schedule%20a%2030-minute%20call%20to%20discuss..." class="btn btn-white-solid">✉️ Schedule via Email</a>
+          <a href="#" onclick="Calendly.initPopupWidget({url:'https://calendly.com/pateldhwani805/30min'});return false;" class="btn btn-white-solid">📅 Book on Calendly</a>
           <a href="tel:7738152616" class="btn btn-outline-white">📞 Call Directly</a>
         </div>
       </div>
@@ -870,7 +872,7 @@ footer a{color:rgba(255,255,255,.5);text-decoration:none}
               <div class="cal-slot-badge">Available</div>
             </div>
           </div>
-          <button class="cal-book-btn" id="bookBtn">📅 Confirm & Send Request</button>
+          <button class="cal-book-btn" id="bookBtn" onclick="Calendly.initPopupWidget({url:'https://calendly.com/pateldhwani805/30min'});return false;">📅 Book on Calendly</button>
         </div>
       </div>
     </div>
@@ -887,13 +889,13 @@ footer a{color:rgba(255,255,255,.5);text-decoration:none}
     <div class="edu-grid">
       <div class="edu-card reveal reveal-d1">
         <div class="edu-icon">🎓</div>
-        <div class="edu-deg">M.S. in Computer Science</div>
+        <div class="edu-deg">M.S in Computer Science</div>
         <div class="edu-school">DePaul University</div>
         <div class="edu-meta">Chicago, IL · January 2025 – December 2026</div>
       </div>
       <div class="edu-card reveal reveal-d2">
         <div class="edu-icon">🏛️</div>
-        <div class="edu-deg">B.Computer Application</div>
+        <div class="edu-deg">B.S in Computer Application</div>
         <div class="edu-school">Silver Oak University</div>
         <div class="edu-meta">Gujarat, India · August 2021 – June 2024</div>
       </div>
@@ -910,8 +912,8 @@ footer a{color:rgba(255,255,255,.5);text-decoration:none}
     <a href="mailto:pateldhwani805@gmail.com" class="contact-email">pateldhwani805@gmail.com</a>
     <span class="contact-phone">773-815-2616 · Chicago, IL</span>
     <div class="contact-row">
-      <a href="#schedule" class="btn btn-fill">📅 Book a Call</a>
-      <a href="https://www.linkedin.com/in/dhwanipatel" target="_blank" class="btn btn-white-c">LinkedIn ↗</a>
+      <a href="#" onclick="Calendly.initPopupWidget({url:'https://calendly.com/pateldhwani805/30min'});return false;" class="btn btn-fill">📅 Book a Call</a>
+      <a href="https://www.linkedin.com/in/dhwani8005/" target="_blank" class="btn btn-white-c">LinkedIn ↗</a>
       <a href="./Dhwani_Patel_Data.pdf" target="_blank" class="btn btn-outline-w">Download Resume ↓</a>
     </div>
   </div>
@@ -970,8 +972,7 @@ document.querySelectorAll('.exp-tab').forEach(tab => {
   });
 });
 
-/* ── CALENDAR SLOT SELECTION ── */
-let selectedSlot = null;
+/* ── CALENDAR SLOT SELECTION (visual only) ── */
 document.querySelectorAll('.cal-slot').forEach(slot => {
   slot.addEventListener('click', () => {
     document.querySelectorAll('.cal-slot').forEach(s => {
@@ -980,20 +981,9 @@ document.querySelectorAll('.cal-slot').forEach(slot => {
     });
     slot.classList.add('selected');
     slot.querySelector('.cal-slot-badge').textContent = 'Selected ✓';
-    selectedSlot = slot.querySelector('.cal-slot-day').textContent + ' ' + slot.querySelector('.cal-slot-time').textContent;
+    // Open Calendly popup on slot click
+    Calendly.initPopupWidget({url:'https://calendly.com/pateldhwani805/30min'});
   });
-});
-
-document.getElementById('bookBtn').addEventListener('click', () => {
-  if (!selectedSlot) {
-    alert('Please select a time slot first.');
-    return;
-  }
-  const sub = encodeURIComponent('Call Request: ' + selectedSlot);
-  const body = encodeURIComponent(
-    'Hi Dhwani,\n\nI\'d like to schedule a 30-minute call on:\n' + selectedSlot + '\n\nLooking forward to connecting!\n\n'
-  );
-  window.location.href = 'mailto:pateldhwani805@gmail.com?subject=' + sub + '&body=' + body;
 });
 
 /* ── NAV ACTIVE STATE ── */
